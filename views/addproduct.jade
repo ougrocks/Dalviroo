@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    .container
+        h2 All Products
+        p
+            | list of all the products added.
+        table.table
+            thead
+                tr
+                    th Name
+
+            tbody
+                each val in resp
+                    tr
+                        td !{val.name}
+                        br
+        form(action='add', method='post')
+            center
+                input(type='text', name='name', placeholder='Enter Product Name')
+                br
+                br
+                button.btn.btn-primary(type='submit') Add Product
+
+

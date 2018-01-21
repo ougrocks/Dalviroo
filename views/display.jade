@@ -1,0 +1,60 @@
+extends layout
+
+block content
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js")
+    script.
+        var socket = io('http://localhost:3000');
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', {my: 'data'});
+            var table_html = '';
+            $.each(data, function (key, value) {
+
+                $.each(value, function (key, value) {
+                    //alert(key + ": " + value);
+                    table_html = table_html + '<tr>';
+                    table_html = table_html + '<td>'+value['raw']['name']+'</td>';
+                    table_html = table_html + '<td>'+value['quantity']+'</td>';
+                    table_html = table_html + '<td>'+value['predict_data']['createdtillnow']+'</td>';
+                    table_html = table_html + '<td>'+value['predict_data']['predicted']+'</td>';
+                    table_html = table_html + '<td><form action="done" method="post"><input type="hidden" name="_id" value="'+value['_id']+'"><input type="submit" value="Done"> </form></td>';
+                    table_html = table_html + '</tr>';
+                });
+
+            });
+            $('#io_table').html(table_html);
+        });
+    .container
+        h2 All Products
+        p
+            | list of all the products added.
+        p#io_data
+        table.table
+            thead
+                tr
+                    th Name
+                    th Quantity
+                    th Created-till-now
+                    th Predicted
+                    th Status
+
+            //tbody
+            //    each val in display_data
+            //        tr
+            //            td !{val.raw.name}
+            //            td !{val.quantity}
+            //            td !{val.predict_data.createdtillnow}
+            //            td !{val.predict_data.predicted}
+            //            form(action='done' method='post')
+            //                input(type='hidden', name='_id', value=val._id)
+            //                td
+            //                    input(type='submit', value='Done')
+            tbody#io_table
+            script.
+
+
+
+
+
+
+

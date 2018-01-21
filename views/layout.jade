@@ -1,0 +1,47 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://getbootstrap.com/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://silviomoreto.github.io/bootstrap-select/dist/css/bootstrap-select.min.css')
+  body
+      nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+          a.navbar-brand(href='/') Dalviroo
+          button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
+              span.navbar-toggler-icon
+          #navbarsExampleDefault.collapse.navbar-collapse
+              ul.navbar-nav.mr-auto
+                  li.nav-item.active
+                      a.nav-link(href='/')
+                          | Home
+                          span.sr-only (current)
+                  li.nav-item
+                      a.nav-link(href='/add') Add Product
+                  li.nav-item
+                      a.nav-link(href='/predict') Add Prediction
+                  li.nav-item
+                      a.nav-link(href='/order') Place Order
+                  li.nav-item
+                      a.nav-link(href='/display') Kitchen Display
+                  li.nav-item
+                      a.nav-link(href='/report') Report
+
+
+    block content
+
+        block scripts
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js', integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=', crossorigin='anonymous')
+    script(src='https://getbootstrap.com/assets/js/vendor/popper.min.js', crossorigin='anonymous')
+    script(src='https://getbootstrap.com/dist/js/bootstrap.min.js', crossorigin='anonymous')
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js")
+    script.
+        var socket = io('http://localhost:3000');
+        socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', { my: 'data' });
+            $(document).ready(function () {
+                document.getElementById("io_data").value = data;
+            });
+        });
+

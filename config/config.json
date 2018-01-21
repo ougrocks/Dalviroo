@@ -1,0 +1,10 @@
+{
+  "db" : {
+    "username": "<MongoDBUsername>",
+    "password": "",
+    "host": "localhost",
+    "port": "",
+    "name": "dalviroodb"
+  }
+}
+

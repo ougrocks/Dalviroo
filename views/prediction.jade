@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    main.container(role='main')
+        .starter-template
+            h1 Prediction Value for Products
+            p.lead
+                | Select Product from dropdown.
+                br
+                form(action='predict', method='post')
+                    select(name="pid")
+                        each val in resp
+                            option(value=val._id)=val.name
+                    br
+                    br
+                    center
+                        input(type='number', name='predicted', placeholder='Enter Predicted Value')
+                        br
+                        br
+                        button.btn.btn-primary(type='submit') Add Prediction
